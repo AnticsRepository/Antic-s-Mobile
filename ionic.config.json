@@ -1,0 +1,7 @@
+{
+  "name": "Antic's Code Mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

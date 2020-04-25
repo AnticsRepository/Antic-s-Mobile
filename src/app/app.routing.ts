@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { Error404Component } from './shared/components/error404/error404.component';
-import { ErrorGuard } from './core/guards/error.guard';
+import { UserGuard } from '@core/guards/user.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: '',
-    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module')
+    .then(m => m.LoginPageModule)
   },
-  { path: '**', canActivate: [ErrorGuard], component: Error404Component }
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module')
+    .then(m => m.TabsPageModule),
+    canLoad: [UserGuard]
+  },
+  { path: '**', component: Error404Component }
 ];
 
 @NgModule({

@@ -64,6 +64,24 @@
 
   --ion-background-color: #ffffff;
   --ion-background-color-rgb: 255,255,255;
+
+  // FONTS
+  --primary-font-size: 16px;
+
+  // SCROLLBAR
+  ::-webkit-scrollbar { width: 8px }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 3px var(--ion-color-primary);
+    -webkit-box-shadow: inset 0 0 3px var(--ion-color-primary);
+    border-radius: 5px;
+  }
 }
 
  body.dark {
@@ -155,7 +173,7 @@
   --ion-color-step-850: #d9d9d9;
   --ion-color-step-900: #e6e6e6;
   --ion-color-step-950: #f2f2f2;
-  --ion-toolbar-background: #0d0d0d;
+  --ion-toolbar-background: #000000;
   --ion-item-background: #000000;
 }
 
@@ -184,7 +202,7 @@
   --ion-color-step-850: #dbdbdb;
   --ion-color-step-900: #e7e7e7;
   --ion-color-step-950: #f3f3f3;
-  --ion-item-background: #1e1e1e;
-  --ion-toolbar-background: #1f1f1f;
+  --ion-item-background: #121212;
+  --ion-toolbar-background: #121212;
   --ion-tab-bar-background: #1f1f1f;
 }

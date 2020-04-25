@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "Antic's Code Mobile",
+  "appId": "io.antics.code.mobile.creator.com",
+  "appName": "Antic's Mobile Creator",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

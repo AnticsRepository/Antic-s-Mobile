@@ -1,0 +1,31 @@
+ion-item {
+ --ripple-color: transparent;
+ --background-focused: transparent;
+ --background-activated: transparent;
+ --background-hover: transparent;
+ --full-highlight-height: 1px;
+ --padding-start: 0;
+ --highlight-color-invalid: #ff0000;
+}
+
+
+@keyframes autofill {
+ to {
+   color: #f4f5f8;
+   background: transparent;
+ }
+}
+
+@-webkit-keyframes autofill {
+ to {
+     color: #f4f5f8;
+     background: transparent;
+ }
+}
+
+input:-webkit-autofill {
+ animation-name: autofill;
+ animation-fill-mode: both;
+ -webkit-animation-name: autofill;
+ -webkit-animation-fill-mode: both;
+}

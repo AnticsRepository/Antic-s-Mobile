@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+
+import {
+  HttpHeaders,
+  HttpClient,
+  HttpParams,
+  HttpErrorResponse
+} from '@angular/common/http';
+
+import { Observable} from 'rxjs';
+import { StorageService } from '../storage/storage.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 
@@ -12,32 +21,53 @@ export class HttpService {
   private readonly type = 'application/json';
   private readonly default = 'application/json';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private ls: StorageService) {}
 
   public get<T>(url: string,
                 headers?: HttpHeaders,
                 params?: HttpParams): Observable<T> {
-    return this.http.get<T>(url, { headers: this.createHeaders(headers), params });
+    return this.http.get<T>(url, { headers: this.createHeaders(headers), params })
+            .pipe(catchError((err: HttpErrorResponse) => {
+              this.error(err);
+              throw err;
+            }
+        ));
   }
 
   public post<T>(url: string,
                  body: any | null,
                  headers?: HttpHeaders,
                  params?: HttpParams): Observable<T> {
-    return this.http.post<T>(url, body, { headers: this.createHeaders(headers), params });
+    return this.http.post<T>(url, body, { headers: this.createHeaders(headers), params })
+            .pipe(catchError((err: HttpErrorResponse) => {
+              this.error(err);
+              throw err;
+            }
+    ));
   }
 
   public put<T>(url: string,
                 body: any | null,
                 headers?: HttpHeaders,
                 params?: HttpParams): Observable<T> {
-    return this.http.put<T>(url, body, { headers: this.createHeaders(headers), params });
+    return this.http.put<T>(url, body, { headers: this.createHeaders(headers), params })
+            .pipe(catchError((err: HttpErrorResponse) => {
+              this.error(err);
+              throw err;
+            }
+        ));
   }
 
   public delete<T>(url: string,
                    headers?: HttpHeaders,
                    params?: HttpParams): Observable<T> {
-    return this.http.delete<T>(url, { headers: this.createHeaders(headers), params });
+    return this.http.delete<T>(url, { headers: this.createHeaders(headers), params })
+            .pipe(catchError((err: HttpErrorResponse) => {
+              this.error(err);
+              throw err;
+            }
+        ));
 }
 
 // tslint:disable-next-line: variable-name
@@ -47,8 +77,16 @@ export class HttpService {
     const headers = _headers || new HttpHeaders();
 
     return headers
-      .set(this.auth, 'Insert Token here')
+      .set(this.auth, this.ls.get('token') || '')
       .set(this.content, contentType)
       .set(this.accept, accept);
+  }
+
+  private error(err: HttpErrorResponse): void {
+    switch (err.status) {
+      case 406: console.log('Bad')
+        break;
+      default: console.log(err)
+    }
   }
 }

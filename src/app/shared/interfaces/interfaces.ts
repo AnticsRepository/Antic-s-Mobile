@@ -18,6 +18,17 @@ interface UserProfile {
  language?: string;
 }
 
+interface ServerResponse {
+  ok: boolean;
+  message?: string;
+  err?: any;
+}
+
+export interface UserResponse extends ServerResponse {
+  user: User;
+  token?: string;
+}
+
 export class CustomError {
  name: string;
  message: string;

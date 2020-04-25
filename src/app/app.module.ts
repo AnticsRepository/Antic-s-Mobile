@@ -12,7 +12,8 @@ import { AppComponent } from './app.component';
 import { APP_CONFIG, APP_CONSTANTS } from './app.config';
 import { CoreModule } from '@core/core.module';
 import { HammerConfig } from '@core/hammer.config';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
+import { ComponentsModule } from '@shared/components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    ComponentsModule
   ],
   providers: [
     StatusBar,

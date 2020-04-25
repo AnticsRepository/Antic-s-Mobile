@@ -1,0 +1,26 @@
+.login {
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
+ margin-bottom: 25px;
+}
+
+p { 
+ font-size: .9rem;
+ margin-bottom: 1.2rem;
+ text-align: center;
+}
+
+img {
+ width: 18px;
+ height: 18px;
+ margin-right: .5rem;
+}
+
+.media {
+ --background: rgba(110, 110, 110, 0.103);
+ padding: 0 1rem 5px;
+ color: var(--ion-color-dark);
+ text-transform: none;
+ margin: 0 auto;
+}

@@ -12,6 +12,7 @@ import { JwtInterceptor } from './services/http/jwt.interceptor';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { StorageModule } from './services/storage/storage.module';
 import { NgMarkdownModule } from './markdown/markdown.module';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, CORE_MODULE_CONSTANTS.TRANSLATE_CONFIG.I18N_PATH,

@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="flex flex-column">
+    <h3>Bienvenido</h3>
+    <h1>Antic<span>'</span>s Code</h1>
+  
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-list>
+        <ion-item>
+          <ion-input name="email"
+                     type="email"
+                     placeholder="Correo"
+                     formControlName="email"
+                     [autofocus]="true">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input name="password"
+                     type="password"
+                     placeholder="Contraseña"
+                     formControlName="password">
+          </ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="remember">Recordar</ion-label>
+            <ion-checkbox [(ngModel)]="remember"
+                          slot="end"
+                          mode="md"
+                          [ngModelOptions]="{standalone: true}">
+            </ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-button type="submit"
+                  expand="full"
+                  color="primary"
+                  shape="round"
+                  mode="md"
+                  [disabled]="form.invalid">
+                   Login
+      </ion-button>
+    </form>
+    <app-social-login></app-social-login>
+
+    <p>¿No tienes cuenta? Crea una  
+      <a href="https://anticscode.netlify.com/"
+      target="_NEW"><span >aquí</span>
+      </a>.
+    </p>
+  </div>
+</ion-content>

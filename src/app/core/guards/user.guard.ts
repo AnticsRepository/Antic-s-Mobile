@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '@app/shared/interfaces/interfaces';
+import { CanLoad } from '@angular/router';
+import { UserService } from '../services/user/user.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable({providedIn: 'root'})
 
-export class UserGuard implements CanActivate {
+export class UserGuard implements CanLoad {
 
-  constructor(private router: Router) { }
+  constructor(private nav: NavController,
+              private user: UserService) { }
 
-  canActivate(): Observable<boolean> {
-    return null
+  canLoad(): boolean {
+    if (!this.user.getUser()) {
+      this.nav.navigateRoot('login', { skipLocationChange: true });
+      return false;
+    }
+    return true;
   }
 
 }

@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { HelpComponent } from '@shared/components/help/help.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserResponse } from '@shared/interfaces/interfaces';
-import { Subject } from 'rxjs';
+import { User } from '@shared/interfaces/interfaces';
+import { Subject, concat, from } from 'rxjs';
 import { UserService } from '@core/services/user/user.service';
-import { filter, takeUntil, finalize } from 'rxjs/operators';
+import { takeUntil, finalize } from 'rxjs/operators';
 import { LoginService } from '@core/services/login/login.service';
 import { StorageService } from '@core/services/storage/storage.service';
 import { NavController } from '@ionic/angular';
@@ -29,20 +29,32 @@ export class LoginPage implements OnInit, OnDestroy {
               private nav: NavController) {}
 
   ngOnInit() {
-    this.createForm();
     this.checkToken();
-    this.rememberMe();
+    this.createForm();
+  }
+
+  private async checkToken(): Promise<void> {
+    this.userSrv.verifyToken()
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(_ => {
+      _ ? this.nav.navigateRoot('tabs') :
+      this.rememberMe();
+    });
   }
 
   private createForm(): void {
     this.form = new FormGroup({
-       email: new FormControl('', [Validators.required,
-                                   Validators.email,
-                                   Validators.minLength(5),
-                                   Validators.maxLength(35)]),
-    password: new FormControl('', [Validators.required,
-                                   Validators.minLength(5),
-                                   Validators.maxLength(25)])});
+       email: new FormControl('', [
+         Validators.required,
+         Validators.email,
+         Validators.minLength(5),
+         Validators.maxLength(35)
+       ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25)
+    ])});
   }
 
   public onSubmit(): void {
@@ -51,31 +63,18 @@ export class LoginPage implements OnInit, OnDestroy {
     this.signIn(email, password);
   }
 
-  private async signIn(e: string, p: string): Promise<void> {
-    await this.crafter.loader();
-    this.loginSrv.signIn(e, p)
-      .pipe(
-        filter(res => res && !!res.ok),
+  private signIn(e: string, p: string): void {
+    concat(
+      from(this.crafter.loader()),
+      this.loginSrv.signIn(e, p)
+    ).pipe(
         takeUntil(this.unsubscribe$),
         finalize(() => this.crafter.loaderOff())
       )
-      .subscribe((res: UserResponse) => {
-        this.userSrv.UserLogIn(res);
+      .subscribe(_ => {
         this.ls.setKey('remember', this.remember);
-        this.nav.navigateRoot('tabs', { skipLocationChange: true });
+        this.nav.navigateRoot('tabs');
       });
-  }
-
-  private checkToken(): void {
-    this.userSrv.verifyToken()
-    .pipe(
-        filter(res => res && !!res.ok),
-        takeUntil(this.unsubscribe$)
-      )
-    .subscribe((res: UserResponse) => {
-      this.userSrv.UserLogIn(res);
-      this.nav.navigateRoot('tabs', { skipLocationChange: true });
-    });
   }
 
   private rememberMe(): void {
@@ -84,13 +83,10 @@ export class LoginPage implements OnInit, OnDestroy {
 
     if ( re && id) {
       this.userSrv.getUserById(id)
-       .pipe(
-          filter(res => res && !!res.ok),
-          takeUntil(this.unsubscribe$)
-        )
-       .subscribe((res: UserResponse) => {
+       .pipe(takeUntil(this.unsubscribe$))
+       .subscribe((res: User) => {
           this.form.controls.email
-          .setValue(res.user.email);
+          .setValue(res.email);
           this.remember = true;
       });
     }

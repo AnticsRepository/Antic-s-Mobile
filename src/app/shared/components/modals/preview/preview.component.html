@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Previsualización
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button shape="round" (click)="close()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="draft">
+    <markdown class="template"
+              ngPreserveWhitespaces
+              [data]="draft.message">
+    </markdown>
+  </ng-container>
+</ion-content>

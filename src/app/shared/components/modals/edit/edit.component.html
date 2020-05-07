@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Editar Artículo
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button shape="round" (click)="close()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="draft">
+    <form [formGroup]="editForm" #f>
+      <ion-list inset="true">
+        <ion-item> <!-- TITLE -->
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item> <!-- COVER -->
+          <ion-label position="stacked">Imagen</ion-label>
+          <ion-input formControlName="cover"></ion-input>
+        </ion-item>
+        <ion-item> <!-- CATEGORY -->
+          <ion-label>Categoría</ion-label>
+          <ion-select formControlName="category">
+            <ion-select-option [value]="c" 
+                               *ngFor="let c of categories">{{c}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- TAGS -->
+          <ion-label>Etiquetas</ion-label>
+          <ion-select formControlName="tags" multiple="true">
+            <ion-select-option [value]="t" 
+                               *ngFor="let t of tags">
+                               {{t}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- LEVEL -->
+          <ion-label>Nivel</ion-label>
+          <ion-select formControlName="level">
+            <ion-select-option [value]="l" 
+                               *ngFor="let l of levels">
+                               {{l}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- BADGES -->
+          <ion-label>Estado</ion-label>
+          <ion-select formControlName="badges" multiple="true">
+            <ion-select-option [value]="b" 
+                               *ngFor="let b of badges">
+                               {{b}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- SUMMARY -->
+          <ion-label position="stacked">Introducción</ion-label>
+          <ion-textarea rows="5" formControlName="summary"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ng-container>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" (click)="onSubmit()">Editar</ion-button>
+</ion-footer>

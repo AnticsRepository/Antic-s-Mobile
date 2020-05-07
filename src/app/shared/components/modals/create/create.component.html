@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Crear Artículo
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button shape="round" (click)="close()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container>
+    <form [formGroup]="createForm" #f (ngSubmit)="onSubmit()">
+      <ion-list inset="true">
+        <ion-item> <!-- TITLE -->
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item> <!-- COVER -->
+          <ion-label position="stacked">Imagen 
+            <span class="white">(URL)</span>
+          </ion-label>
+          <ion-input formControlName="cover" ></ion-input>
+        </ion-item>
+        <ion-item> <!-- CATEGORY -->
+          <ion-label>Categoría</ion-label>
+          <ion-select formControlName="category">
+            <ion-select-option [value]="c" 
+                               *ngFor="let c of categories">{{c}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- LEVEL -->
+          <ion-label>Nivel</ion-label>
+          <ion-select formControlName="level">
+            <ion-select-option [value]="l" 
+                               *ngFor="let l of levels">
+                               {{l}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- TAGS -->
+          <ion-label>Etiquetas 
+            <span class="white">(Max 3)</span>
+          </ion-label>
+          <ion-select formControlName="tags" multiple="true">
+            <ion-select-option [value]="t" 
+                               *ngFor="let t of tags">
+                               {{t}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- BADGES -->
+          <ion-label>Estado 
+            <span class="white">(Max 2)</span>
+          </ion-label>
+          <ion-select formControlName="badges" multiple="true">
+            <ion-select-option [value]="b" 
+                               *ngFor="let b of badges">
+                               {{b}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item> <!-- SUMMARY -->
+          <ion-label position="stacked">Introducción 
+            <span class="white">(Min 100)</span>
+          </ion-label>
+          <ion-textarea rows="4" formControlName="summary"></ion-textarea>
+        </ion-item>
+        <ion-item> <!-- LINKS -->
+          <ion-label position="stacked">Nombre Enlace</ion-label>
+          <ion-input formControlName="link_name"></ion-input>
+        </ion-item>
+        <ion-item> <!-- LINKS -->
+          <ion-label position="stacked">URL Enlace</ion-label>
+          <ion-input formControlName="link_url"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="addLink()" 
+                      color="success"
+                      [disabled]="draft?.links?.length == 3">Insertar
+          </ion-button>
+          <ion-label class="white" slot="end">(Máx 3)</ion-label>
+          <ion-label class="white" 
+                     slot="end">Total {{draft?.links?.length || 0}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ng-container>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" 
+              type="submit" 
+              (click)="onSubmit()"
+              [disabled]="createForm.invalid">Crear    
+  </ion-button>
+</ion-footer>

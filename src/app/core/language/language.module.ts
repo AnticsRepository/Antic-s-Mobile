@@ -7,9 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     TranslateModule
-  ],
-  declarations: [],
-  exports: []
+  ]
 })
 
 export class LanguageModule {
@@ -17,9 +15,7 @@ export class LanguageModule {
   public static forRoot(): ModuleWithProviders {
     return {
       ngModule: LanguageModule,
-      providers: [
-        LanguageService
-      ]
+      providers: [LanguageService]
     };
   }
 }

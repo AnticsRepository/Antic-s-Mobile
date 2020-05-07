@@ -16,6 +16,12 @@ const routes: Routes = [
     .then(m => m.TabsPageModule),
     canLoad: [UserGuard]
   },
+  {
+    path: 'detail/:slug',
+    loadChildren: () => import('./pages/detail/detail.module')
+    .then(m => m.DetailPageModule),
+    canLoad: [UserGuard]
+  },
   { path: '**', component: Error404Component }
 ];
 

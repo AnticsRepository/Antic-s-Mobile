@@ -7,15 +7,14 @@ import { NavController } from '@ionic/angular';
 
 export class UserGuard implements CanLoad {
 
-  constructor(private nav: NavController,
-              private user: UserService) { }
+  constructor(
+    private nav: NavController,
+    private user: UserService
+  ) { }
 
   canLoad(): boolean {
-    if (!this.user.getUser()) {
-      this.nav.navigateRoot('login', { skipLocationChange: true });
-      return false;
-    }
-    return true;
+    return !this.user.getUser() ?
+           (this.nav.navigateRoot('login'), false) : true;
   }
 
 }

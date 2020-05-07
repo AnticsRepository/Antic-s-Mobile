@@ -1,45 +1,43 @@
 import { Injectable } from '@angular/core';
+
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { tap, filter, take } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { StorageService } from '../storage/storage.service';
 import { UserService } from '../user/user.service';
-import { UserResponse } from '@shared/interfaces/interfaces';
-import { Router } from '@angular/router';
 import { ErrorService } from '../error/error.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable()
+
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private ls: StorageService,
-              private userSrv: UserService,
-              private errorService: ErrorService,
-              private router: Router) {}
+  constructor(
+    private ls: StorageService,
+    private userSrv: UserService,
+    private errorSrv: ErrorService,
+    private nav: NavController
+  ) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(tap(((res: HttpResponse<any>) => {
+  intercept<T>(
+    request: HttpRequest<T>,
+    next: HttpHandler): Observable<HttpEvent<T>> {
+    return next.handle(request).pipe(tap((() => {
     }), ((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        this.errorService.saveError(error);
+        this.errorSrv.saveError(error);
         const id = this.ls.get('user');
         if (!id) { return throwError(error); }
         this.userSrv.refreshToken(id)
-         .pipe(
-           filter(res => res && !!res.ok),
-           take(1)
-          )
-         .subscribe((res: UserResponse) => {
-           this.userSrv.UserLogIn(res);
-           this.router.navigateByUrl('tabs');
-          });
+         .pipe(take(1))
+         .subscribe(_ => this.nav.navigateRoot('tabs'));
       } else { return throwError(error); }
     })));
   }

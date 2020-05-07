@@ -20,7 +20,8 @@ export function markedOptionsFactory(): MarkedOptions {
   const linkRenderer = renderer.link;
   renderer.link = (href, title, text) => {
     const html = linkRenderer.call(renderer, href, title, text);
-    return html.replace(/^<a /, '<a role="link" tabindex="0" target="_blank" rel="nofollow noopener noreferrer" ');
+    return html.replace(/^<a /,
+      '<a role="link" tabindex="0" target="_blank" rel="nofollow noopener noreferrer" ');
   };
 
   return {
@@ -34,10 +35,7 @@ export function markedOptionsFactory(): MarkedOptions {
 }
 
 @NgModule({
-  declarations: [],
-  imports: [
-    MarkdownModule.forRoot(options)
-  ]
+  imports: [MarkdownModule.forRoot(options)]
 })
 
 export class NgMarkdownModule { }

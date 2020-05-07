@@ -1,10 +1,8 @@
 import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
 import { environment } from '@env/environment';
-import { filter, takeUntil, finalize } from 'rxjs/operators';
-import { UserResponse } from '@shared/interfaces/interfaces';
+import { takeUntil, finalize } from 'rxjs/operators';
 import { GoogleService } from '@core/services/login/google.service';
-import { UserService } from '@core/services/user/user.service';
-import { Subject } from 'rxjs';
+import { Subject, concat } from 'rxjs';
 import { ThemeService } from '@services/theme/theme.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { NavController } from '@ionic/angular';
@@ -21,12 +19,13 @@ export class SocialLoginComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private google: GoogleService,
-              private userSrv: UserService,
-              private nav: NavController,
-              private zone: NgZone,
-              public theme: ThemeService,
-              private crafter: CrafterService) { }
+  constructor(
+    private google: GoogleService,
+    private nav: NavController,
+    private zone: NgZone,
+    public theme: ThemeService,
+    private crafter: CrafterService
+  ) { }
 
   ngOnInit() {
     this.initGoogle();
@@ -45,20 +44,20 @@ export class SocialLoginComponent implements OnInit, OnDestroy {
   }
 
   private googlePrompt(element: HTMLElement): void {
-    this.google.auth2.attachClickHandler(element, {}, async profile => {
-      const token = profile.getAuthResponse().id_token;
-      await this.crafter.loader();
-      this.google.googleSignIn(token)
-      .pipe(
-        filter(res => res && !!res.ok),
-        takeUntil(this.unsubscribe$),
-        finalize(() => this.crafter.loaderOff())
-      )
-      .subscribe((res: UserResponse) => {
-        this.userSrv.UserLogIn(res);
-        this.zone.run(_ => this.nav.navigateRoot('tabs',
-                          { skipLocationChange: true }));
-      });
+    this.google.auth2.attachClickHandler(element, null,
+      (profile: any) => {
+        const token = profile.getAuthResponse().id_token;
+        concat(
+          this.crafter.loader(),
+          this.google.googleSignIn(token)
+        )
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          finalize(() => this.crafter.loaderOff())
+        )
+        .subscribe(() =>
+          this.zone.run(_ => this.nav.navigateRoot('tabs'))
+        );
     });
   }
 

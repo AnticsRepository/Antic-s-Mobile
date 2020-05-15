@@ -3,42 +3,21 @@ import { HttpService } from '../http/http.service';
 import { User, UserResponse } from '@app/shared/interfaces/interfaces';
 import { Observable, of } from 'rxjs';
 import { StorageService } from '@app/core/services/storage/storage.service';
-import { map } from 'rxjs/operators';
 import { environment } from '@env/environment';
+import { filter, tap, map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 
 export class UserService {
 
-  readonly API_USERS = environment.api + 'users';
-  readonly API_TOKEN = environment.api + 'token';
+  readonly API_USER = environment.api + 'user/';
+  readonly API_TOKEN = environment.api + 'token/';
   private user: User;
 
-  constructor(private http: HttpService,
-              private ls: StorageService) {
-      if (!environment.production) { console.log('UserService'); }
-  }
-
-  public getUserById(id: string): Observable<UserResponse> {
-    return this.http.get(environment.api + `user/${id}`);
-  }
-
-  public refreshToken(id: string): Observable<UserResponse> {
-    return this.http.post(this.API_TOKEN + `/${id}`, null);
-  }
-
-  public verifyToken(): Observable<UserResponse> {
-    if (!this.ls.get('token')) { return of(null); }
-    return this.http.get(this.API_TOKEN)
-      .pipe(map((res: UserResponse) => {
-        if (res.ok) {
-          this.user = res.user;
-          return res;
-        } else { this.logout(); }
-    }));
-  }
+  constructor(
+    private http: HttpService,
+    private ls: StorageService
+  ) { }
 
   public getUser(): User {
     return this.user || null;
@@ -48,9 +27,38 @@ export class UserService {
     this.user = user;
   }
 
+  public getUserById(id: string): Observable<User> {
+    return this.http
+      .get<UserResponse>(this.API_USER + id)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.user)
+      );
+  }
+
+  public refreshToken(id: string): Observable<User> {
+    return this.http
+      .post<UserResponse>(this.API_TOKEN + id, null)
+      .pipe(
+        filter(res => res && !!res.ok),
+        tap(res => this.UserLogIn(res)),
+        map(res => res.user)
+      );
+  }
+
+  public verifyToken(): Observable<User> {
+    if (!this.ls.get('token')) { return of(null); }
+    return this.http
+      .get<UserResponse>(this.API_TOKEN)
+      .pipe(
+        filter(res => res && !!res.ok),
+        tap(res => this.UserLogIn(res)),
+        map(res => res.user)
+      );
+  }
+
   public logout(): void {
     this.ls.setKey('token', null);
-    this.ls.setKey('welcome', false);
     this.user = null;
   }
 

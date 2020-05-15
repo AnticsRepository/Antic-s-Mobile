@@ -1,6 +1,6 @@
 {
   "name": "antics-mobile-creator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Sergi Martínez",
   "homepage": "https://anticscode.netlify.com/",
   "scripts": {
@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "release": "ng build --prod --buildOptimizer=true --output-hashing=all"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +28,6 @@
     "@ionic/angular": "^5.0.7",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
-    "angular-disable-browser-back-button": "^1.0.1",
     "core-js": "^3.6.5",
     "ngx-markdown": "^9.0.0",
     "ngx-webstorage": "^5.0.0",

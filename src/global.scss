@@ -33,3 +33,7 @@ body {
  font-display: swap;
 }
 
+.full textarea  {
+ height: calc(100vh - 70px);
+}
+

@@ -21,8 +21,10 @@ export class HttpService {
   private readonly type = 'application/json';
   private readonly default = 'application/json';
 
-  constructor(private http: HttpClient,
-              private ls: StorageService) {}
+  constructor(
+    private http: HttpClient,
+    private ls: StorageService
+  ) {}
 
   public get<T>(url: string,
                 headers?: HttpHeaders,
@@ -58,17 +60,6 @@ export class HttpService {
             }
         ));
   }
-
-  public delete<T>(url: string,
-                   headers?: HttpHeaders,
-                   params?: HttpParams): Observable<T> {
-    return this.http.delete<T>(url, { headers: this.createHeaders(headers), params })
-            .pipe(catchError((err: HttpErrorResponse) => {
-              this.error(err);
-              throw err;
-            }
-        ));
-}
 
 // tslint:disable-next-line: variable-name
   private createHeaders(_headers?: HttpHeaders): HttpHeaders {

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Markdown
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content force-overscroll="false">
+  <ng-container *ngIf="draft">
+    <ion-textarea [(ngModel)]="draft.message"
+                  placeholder="Escribe aquí el mensaje"
+                  class="full">
+    </ion-textarea>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button size="small">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button (click)="open('preview')">
+          <ion-icon name="reader-outline" 
+                    color="secondary">
+          </ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="open('edit')">
+          <ion-icon name="brush" 
+                    color="success">
+          </ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="update()">
+          <ion-icon name="cloud-upload-outline" 
+                    color="warning">
+          </ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ion-content>

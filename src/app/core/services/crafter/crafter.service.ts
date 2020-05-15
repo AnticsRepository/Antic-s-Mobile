@@ -9,34 +9,46 @@ import {
 
 import { TranslateService } from '@ngx-translate/core';
 import { ComponentRef } from '@ionic/core';
-import { environment } from '@env/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 
 export class CrafterService {
 
-    constructor(private alertCtrl: AlertController,
-                private toastCtrl: ToastController,
-                private popCtrl: PopoverController,
-                private translate: TranslateService,
-                private modalCtrl: ModalController,
-                private loading: LoadingController) {
-      if (!environment.production) { console.log('CrafterService'); }
-  }
-
-  public close(): void {
-    this.popCtrl.dismiss();
-  }
+  constructor(
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private popCtrl: PopoverController,
+    private translate: TranslateService,
+    private modalCtrl: ModalController,
+    private loading: LoadingController
+  ) { }
 
   public async alert(message: string): Promise<void> {
     const alert = await this.alertCtrl.create({
       header: 'Antic\'s Code Mobile',
+      mode: 'ios',
       message: this.translateMessage(message),
       buttons: ['OK']
     });
     return alert.present();
+  }
+
+  public async confirm(message: string, header: string): Promise<any> {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        { text: 'OK' }
+      ]
+    });
+
+    alert.present();
+    return alert.onDidDismiss();
   }
 
   public async toast(message: string): Promise<void> {
@@ -79,6 +91,10 @@ export class CrafterService {
 
   private translateMessage(msg: string): string {
     return this.translate.instant(msg);
+  }
+
+  public close(): void {
+    this.popCtrl.dismiss();
   }
 
 }

@@ -1,11 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content force-overscroll="false" class="tab">
+  <ion-img></ion-img>
+  <div class="title">
+    <span>Mis Artículos</span>
+  </div>
 
-<ion-content>
-  Home
+  <ion-list inset="true">
+    <ion-item *ngFor="let draft of draftSrv.drafts"
+              (click)="navigate(draft.slug)"
+              detail
+              class="ion-text-wrap">
+      <ion-avatar slot="start">
+        <img [src]="draft.category | logo">
+      </ion-avatar>
+      <ion-label>
+        {{draft.title}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" 
+          horizontal="end" 
+          slot="fixed">
+    <ion-fab-button size="small" (click)="create()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

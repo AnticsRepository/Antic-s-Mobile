@@ -12,7 +12,6 @@ import { JwtInterceptor } from './services/http/jwt.interceptor';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { StorageModule } from './services/storage/storage.module';
 import { NgMarkdownModule } from './markdown/markdown.module';
-import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, CORE_MODULE_CONSTANTS.TRANSLATE_CONFIG.I18N_PATH,
@@ -35,7 +34,6 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
   ],
-  declarations: [],
   providers: [
     HttpService,
     LanguageService,
@@ -48,7 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
-      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+      throw new Error('CoreModule is already loaded.');
     }
   }
 }

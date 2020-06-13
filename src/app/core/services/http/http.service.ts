@@ -16,6 +16,7 @@ import { catchError } from 'rxjs/operators';
 export class HttpService {
 
   private readonly auth = 'x-Token';
+  private readonly access = 'x-Access';
   private readonly content = 'Content-type';
   private readonly accept = 'Accept';
   private readonly type = 'application/json';
@@ -66,11 +67,13 @@ export class HttpService {
     const contentType = _headers ? (_headers.get(this.type) || this.default) : this.default;
     const accept = _headers ? (_headers.get(this.accept) || this.default) : this.default;
     const headers = _headers || new HttpHeaders();
+    const access = 'Antic\'s';
 
     return headers
       .set(this.auth, this.ls.get('token') || '')
       .set(this.content, contentType)
-      .set(this.accept, accept);
+      .set(this.accept, accept)
+      .set(this.access, access);
   }
 
   private error(err: HttpErrorResponse): void {

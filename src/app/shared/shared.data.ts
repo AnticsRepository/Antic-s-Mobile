@@ -10,7 +10,8 @@ export const CATEGORIES: string[] = [
  'GO',
  'Python',
  'Git',
- 'Antic\'s'
+ 'Antic\'s',
+ 'Deno'
 ];
 
 export const TAGS: string[] = [

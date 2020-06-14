@@ -49,8 +49,8 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.createForm = new FormGroup({
       title: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(90)
+        Validators.minLength(10),
+        Validators.maxLength(35)
       ]),
       category: new FormControl(null, [
         Validators.required
@@ -93,6 +93,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   public addLink(): void {
     const { link_name, link_url } = this.createForm.value;
+    if (!link_name || !link_url) { return; }
     this.draft.links.push({
       name: link_name,
       url: link_url
@@ -100,8 +101,6 @@ export class CreateComponent implements OnInit, OnDestroy {
 
     this.createForm.get('link_name').setValue('');
     this.createForm.get('link_url').setValue('');
-
-    console.log(this.draft.links);
   }
 
   public onSubmit(): void {
@@ -113,12 +112,11 @@ export class CreateComponent implements OnInit, OnDestroy {
     draft.user = this.userSrv.getUser()._id;
     draft.message = 'Aquí va el mensaje';
 
-    console.log(draft);
-
     this.draftSrv.createDraft(draft)
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(_ => {
       this.modalCtrl.dismiss();
+      this.draftSrv.getDraftsByUser().toPromise().then();
       const confirm = this.crafter.confirm('¿Quieres editarlo ahora?', 'Artículo guardado');
       confirm.then(async (res) => {
         if (!res.role) {

@@ -1,3 +1,11 @@
 {
- "home.welcome": "Welcome"
+ "web.dev": "Web",
+ "front.dev": "Frontend",
+ "back.dev": "Backend",
+ "full.dev": "Full-Stack",
+ "design.dev": "Designer",
+ "design.web": "Web Designer",
+ "mobile.dev": "Mobile Developer",
+ "not.defined": "Not defined",
+ "bio.not.defined": "Not Defined. Write something about You"
 }

@@ -34,3 +34,38 @@ ion-img {
   0px 18px 23px rgba(0,0,0,0.2);
  }
 }
+
+.language {
+ --background: rgba(0,0,0,0.2);
+ --padding-start: 1rem;
+ margin-top: 1rem;
+ border-radius: 4px;
+
+ & ion-icon { 
+  margin-right: 1rem;
+  color: var(--ion-color-primary);
+ }
+}
+
+ion-card {
+ box-shadow: none !important;
+}
+
+ion-card-header {
+ padding-top: 7px;
+}
+
+ion-list {
+ padding-top: 0;
+ margin-bottom: .8rem;
+
+ & ion-item {
+   & ion-icon { 
+    margin-right: 1rem;
+   }
+
+   & ion-label {
+    font-size: .9rem;
+   }
+ }
+}

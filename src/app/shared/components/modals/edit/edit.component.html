@@ -16,32 +16,28 @@
     <form [formGroup]="editForm" #f>
       <ion-list inset="true">
         <ion-item> <!-- TITLE -->
-          <ion-label position="stacked">Título</ion-label>
+          <ion-label position="stacked">
+            Título 
+            <span class="white">(Min 10, Max 35)</span>
+          </ion-label>
           <ion-input formControlName="title"></ion-input>
         </ion-item>
         <ion-item> <!-- COVER -->
-          <ion-label position="stacked">Imagen</ion-label>
+          <ion-label position="stacked">Imagen 
+            <span class="white">(URL)</span>
+          </ion-label>
           <ion-input formControlName="cover"></ion-input>
         </ion-item>
         <ion-item> <!-- CATEGORY -->
-          <ion-label>Categoría</ion-label>
+          <ion-label class="select">Categoría</ion-label>
           <ion-select formControlName="category">
             <ion-select-option [value]="c" 
                                *ngFor="let c of categories">{{c}}
             </ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item> <!-- TAGS -->
-          <ion-label>Etiquetas</ion-label>
-          <ion-select formControlName="tags" multiple="true">
-            <ion-select-option [value]="t" 
-                               *ngFor="let t of tags">
-                               {{t}}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
         <ion-item> <!-- LEVEL -->
-          <ion-label>Nivel</ion-label>
+          <ion-label class="select">Nivel</ion-label>
           <ion-select formControlName="level">
             <ion-select-option [value]="l" 
                                *ngFor="let l of levels">
@@ -49,8 +45,21 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-item> <!-- TAGS -->
+          <ion-label class="select">Etiquetas 
+            <span class="white">(Max 3)</span>
+          </ion-label>
+          <ion-select formControlName="tags" multiple="true">
+            <ion-select-option [value]="t" 
+                               *ngFor="let t of tags">
+                               {{t}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-item> <!-- BADGES -->
-          <ion-label>Estado</ion-label>
+          <ion-label class="select">Estado 
+            <span class="white">(Max 2)</span>
+          </ion-label>
           <ion-select formControlName="badges" multiple="true">
             <ion-select-option [value]="b" 
                                *ngFor="let b of badges">
@@ -59,7 +68,9 @@
           </ion-select>
         </ion-item>
         <ion-item> <!-- SUMMARY -->
-          <ion-label position="stacked">Introducción</ion-label>
+          <ion-label position="stacked">Introducción 
+            <span class="white">(Min 100)</span>
+          </ion-label>
           <ion-textarea rows="5" formControlName="summary"></ion-textarea>
         </ion-item>
       </ion-list>
@@ -68,5 +79,8 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="full" (click)="onSubmit()">Editar</ion-button>
+  <ion-button expand="full" 
+              [disabled]="editForm.invalid" 
+              (click)="onSubmit()">Editar
+  </ion-button>
 </ion-footer>

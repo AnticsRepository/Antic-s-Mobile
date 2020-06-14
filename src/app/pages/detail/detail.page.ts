@@ -65,7 +65,10 @@ export class DetailPage implements OnInit, OnDestroy {
         this.draftSrv.updateDraftMessage(
           this.draft.message, this.draft._id
         ).pipe(takeUntil(this.unsubscribe$))
-         .subscribe(_ => this.crafter.alert('Mensaje Actualizado'));
+         .subscribe(_ => {
+           this.draftSrv.getDraftsByUser().toPromise().then();
+           this.crafter.alert('Mensaje Actualizado');
+          });
       }
     })
   }

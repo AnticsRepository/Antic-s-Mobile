@@ -4,7 +4,7 @@
     <span>Mis Artículos</span>
   </div>
 
-  <ion-list inset="true">
+  <ion-list inset="true" *ngIf="draftSrv.drafts?.length > 0; else noDrafts">
     <ion-item *ngFor="let draft of draftSrv.drafts"
               (click)="navigate(draft.slug)"
               detail
@@ -14,9 +14,20 @@
       </ion-avatar>
       <ion-label>
         {{draft.title}}
+        <ion-icon *ngIf="draft.status === 'Draft'"
+                  name="brush-outline" 
+                  color="success"
+                  class="icon-draft">
+        </ion-icon>
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <ng-template #noDrafts>
+    <div class="no-articles">
+      Sin Artículos
+    </div>
+  </ng-template>
 
   <ion-fab vertical="bottom" 
           horizontal="end" 

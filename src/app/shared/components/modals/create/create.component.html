@@ -16,7 +16,10 @@
     <form [formGroup]="createForm" #f (ngSubmit)="onSubmit()">
       <ion-list inset="true">
         <ion-item> <!-- TITLE -->
-          <ion-label position="stacked">Título</ion-label>
+          <ion-label position="stacked">
+            Título 
+            <span class="white">(Min 10, Max 35)</span>
+          </ion-label>
           <ion-input formControlName="title"></ion-input>
         </ion-item>
         <ion-item> <!-- COVER -->
@@ -26,7 +29,7 @@
           <ion-input formControlName="cover" ></ion-input>
         </ion-item>
         <ion-item> <!-- CATEGORY -->
-          <ion-label>Categoría</ion-label>
+          <ion-label class="select">Categoría</ion-label>
           <ion-select formControlName="category">
             <ion-select-option [value]="c" 
                                *ngFor="let c of categories">{{c}}
@@ -34,7 +37,7 @@
           </ion-select>
         </ion-item>
         <ion-item> <!-- LEVEL -->
-          <ion-label>Nivel</ion-label>
+          <ion-label class="select">Nivel</ion-label>
           <ion-select formControlName="level">
             <ion-select-option [value]="l" 
                                *ngFor="let l of levels">
@@ -43,7 +46,7 @@
           </ion-select>
         </ion-item>
         <ion-item> <!-- TAGS -->
-          <ion-label>Etiquetas 
+          <ion-label class="select">Etiquetas 
             <span class="white">(Max 3)</span>
           </ion-label>
           <ion-select formControlName="tags" multiple="true">
@@ -54,10 +57,11 @@
           </ion-select>
         </ion-item>
         <ion-item> <!-- BADGES -->
-          <ion-label>Estado 
+          <ion-label class="select">Estado 
             <span class="white">(Max 2)</span>
           </ion-label>
-          <ion-select formControlName="badges" multiple="true">
+          <ion-select formControlName="badges" 
+                      multiple="true">
             <ion-select-option [value]="b" 
                                *ngFor="let b of badges">
                                {{b}}
@@ -71,7 +75,10 @@
           <ion-textarea rows="4" formControlName="summary"></ion-textarea>
         </ion-item>
         <ion-item> <!-- LINKS -->
-          <ion-label position="stacked">Nombre Enlace</ion-label>
+          <ion-label position="stacked">
+            Nombre Enlace
+            <span class="white">(Max 3)</span>
+          </ion-label>
           <ion-input formControlName="link_name"></ion-input>
         </ion-item>
         <ion-item> <!-- LINKS -->
@@ -80,13 +87,14 @@
         </ion-item>
         <ion-item>
           <ion-button (click)="addLink()" 
-                      color="success"
+                      color="tertiary"
                       [disabled]="draft?.links?.length == 3">Insertar
           </ion-button>
-          <ion-label class="white" slot="end">(Máx 3)</ion-label>
-          <ion-label class="white" 
-                     slot="end">Total {{draft?.links?.length || 0}}
-          </ion-label>
+          <div class="total-links">
+            <ion-label class="white select" slot="end">
+              Total {{draft?.links?.length || 0}}
+            </ion-label>
+          </div>
         </ion-item>
       </ion-list>
     </form>

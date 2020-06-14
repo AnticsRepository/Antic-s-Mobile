@@ -50,3 +50,16 @@ ion-avatar {
 *::-webkit-scrollbar {
   display: none;
 }
+
+.no-articles {
+  width: 100%;
+  height: calc(100% - 156px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.icon-draft {
+  margin-left: .5rem;
+}

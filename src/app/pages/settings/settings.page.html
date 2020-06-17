@@ -1,0 +1,44 @@
+<ion-content force-overscroll="false">
+  <app-page-header [title]="'config'"></app-page-header>
+  <div class="tab-delay">
+    <ion-list inset="true">
+      <ion-item> <!-- THEME -->
+        <ion-icon name="color-palette-outline" slot="start"></ion-icon>
+        <ion-label>Tema</ion-label>
+        <ion-select [(ngModel)]="theme" 
+                    (ngModelChange)="themeChanged($event)">
+          <ion-select-option [value]="t" 
+                             *ngFor="let t of ['light', 'dark']">{{t | titlecase}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item> <!-- LANGUAGE -->
+        <ion-icon name="language-outline" slot="start"></ion-icon>
+        <ion-label>Idioma</ion-label>
+        <ion-select [(ngModel)]="language"
+                    (ngModelChange)="languageChanged($event)">
+          <ion-select-option [value]="l.value" 
+                             *ngFor="let l of lang">{{l.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item> <!-- REMEMBER -->
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-label>Recordar Email</ion-label>
+        <ion-select [(ngModel)]="remember"
+                    (ngModelChange)="rememberChanged($event)">
+          <ion-select-option [value]="r.value" 
+                             *ngFor="let r of mail">{{r.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list inset="true">
+      <ion-item lines="none"> <!-- LOG OUT -->
+        <ion-icon name="exit-outline" slot="start"></ion-icon>
+        <ion-label>Desconectar</ion-label>
+        <ion-button (click)="logout()">Salir</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

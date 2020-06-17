@@ -40,7 +40,7 @@ export class CrafterService {
       mode: 'ios',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
         },
         { text: 'OK' }

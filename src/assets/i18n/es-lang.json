@@ -1,4 +1,7 @@
 {
+  "articles": "Artículos",
+  "profile": "Perfil",
+  "config": "Configuración",
   "web.dev": "Web",
   "front.dev": "Frontend",
   "back.dev": "Backend",

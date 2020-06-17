@@ -1,11 +1,17 @@
 ion-router-outlet > .ion-page .tab {
- animation: fadeMobile 0.3s 1 forwards;
+  opacity: 0;
+  animation: fadeMobile 0.3s 1 forwards;
+}
+
+ion-router-outlet > .ion-page .tab-delay {
+  opacity: 0;
+  animation: fadeMobile 0.3s 0.2s 1 forwards;
 }
 
 @keyframes fadeMobile {
  0% {
    opacity: 0;
-   transform: translate3d(0, -5vh, 0);
+   transform: translate3d(0, -2vh, 0);
  }
  100% {
    opacity: 1;

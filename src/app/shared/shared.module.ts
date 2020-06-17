@@ -9,7 +9,7 @@ import { LanguageModule } from '@app/core/language/language.module';
     CommonModule,
     PipesModule,
     TranslateModule,
-    LanguageModule,
+    LanguageModule
   ],
   exports: [
     PipesModule,

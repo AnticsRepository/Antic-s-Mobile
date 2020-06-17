@@ -63,18 +63,16 @@ export class LoginPage implements OnInit, OnDestroy {
     this.signIn(email, password);
   }
 
-  private signIn(e: string, p: string): void {
-    concat(
-      from(this.crafter.loader()),
-      this.loginSrv.signIn(e, p)
-    ).pipe(
-        takeUntil(this.unsubscribe$),
-        finalize(() => this.crafter.loaderOff())
-      )
-      .subscribe(_ => {
-        this.ls.setKey('remember', this.remember);
-        this.nav.navigateRoot('tabs');
-      });
+  private async signIn(e: string, p: string): Promise<void> {
+    await this.crafter.loader();
+    this.loginSrv.signIn(e, p).pipe(
+      takeUntil(this.unsubscribe$),
+      finalize(() => this.crafter.loaderOff())
+    )
+    .subscribe(_ => {
+      this.ls.setKey('remember', this.remember);
+      this.nav.navigateRoot('tabs');
+    });
   }
 
   private rememberMe(): void {

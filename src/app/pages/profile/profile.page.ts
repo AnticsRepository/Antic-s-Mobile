@@ -16,7 +16,6 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.user = this.userSrv.getUser();
-    console.log(this.user)
   }
 
 }

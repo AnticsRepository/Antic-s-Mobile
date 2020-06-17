@@ -118,7 +118,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       this.modalCtrl.dismiss();
       this.draftSrv.getDraftsByUser().toPromise().then();
       const confirm = this.crafter.confirm('¿Quieres editarlo ahora?', 'Artículo guardado');
-      confirm.then(async (res) => {
+      confirm.then(res => {
         if (!res.role) {
           this.router.navigateByUrl('detail/' + _.slug);
         }

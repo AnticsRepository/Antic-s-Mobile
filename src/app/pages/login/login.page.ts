@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { HelpComponent } from '@shared/components/help/help.component';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '@shared/interfaces/interfaces';
-import { Subject, concat, from } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UserService } from '@core/services/user/user.service';
 import { takeUntil, finalize } from 'rxjs/operators';
 import { LoginService } from '@core/services/login/login.service';
 import { StorageService } from '@core/services/storage/storage.service';
 import { NavController } from '@ionic/angular';
+import { HelpComponent } from '@app/shared/components/help/help.component';
 
 @Component({
   selector: 'app-login',

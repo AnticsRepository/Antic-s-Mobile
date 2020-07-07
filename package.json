@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "release": "ng build --prod --buildOptimizer=true --output-hashing=all"
+    "release": "ng build --prod --buildOptimizer=true --output-hashing=all",
+    "android": "npm run release && npx cap copy android"
   },
   "private": true,
   "dependencies": {

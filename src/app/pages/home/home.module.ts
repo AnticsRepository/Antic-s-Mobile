@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { HomePageRouting } from './home.routing';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { LayoutModule } from '@shared/components/layout/layout.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { LayoutModule } from '@shared/components/layout/layout.module';
     CommonModule,
     HomePageRouting,
     PipesModule,
-    LayoutModule
+    LayoutModule,
+    TranslateModule
   ],
   declarations: [HomePage]
 })

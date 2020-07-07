@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { CreateComponent } from '@shared/components/modals/create/create.component';
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomePage implements OnInit, OnDestroy {
     public draftSrv: DraftsService,
     private router: Router,
     private modalCtrl: ModalController,
-    private crafter: CrafterService
+    private crafter: CrafterService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,10 @@ export class HomePage implements OnInit, OnDestroy {
     });
 
     if (exist) {
-      const confirm = this.crafter.confirm('¿Quieres sobreescribirlo?', 'Ya existe un Artículo');
+      const confirm = this.crafter.confirm(
+        this.translate.instant('overwrite'),
+        this.translate.instant('article.exist')
+      );
       confirm.then(async res => {
         if (!res.role) {
           const modal = await this.modalCtrl.create({

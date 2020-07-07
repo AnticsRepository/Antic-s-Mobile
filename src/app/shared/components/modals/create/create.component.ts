@@ -10,6 +10,7 @@ import { UserService } from '@core/services/user/user.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { EditComponent } from '../edit/edit.component';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create',
@@ -33,7 +34,8 @@ export class CreateComponent implements OnInit, OnDestroy {
     private draftSrv: DraftsService,
     private userSrv: UserService,
     private crafter: CrafterService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -110,14 +112,16 @@ export class CreateComponent implements OnInit, OnDestroy {
     draft.links = this.draft.links;
     draft.author = this.userSrv.getUser().name;
     draft.user = this.userSrv.getUser()._id;
-    draft.message = 'Aquí va el mensaje';
+    draft.message = this.translate.instant('here.message');
 
     this.draftSrv.createDraft(draft)
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(_ => {
       this.modalCtrl.dismiss();
       this.draftSrv.getDraftsByUser().toPromise().then();
-      const confirm = this.crafter.confirm('¿Quieres editarlo ahora?', 'Artículo guardado');
+      const confirm = this.crafter.confirm(
+        this.translate.instant('edit.now'),
+        this.translate.instant('article.saved'));
       confirm.then(res => {
         if (!res.role) {
           this.router.navigateByUrl('detail/' + _.slug);

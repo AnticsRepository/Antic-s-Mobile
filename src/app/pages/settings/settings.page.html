@@ -4,7 +4,7 @@
     <ion-list inset="true">
       <ion-item> <!-- THEME -->
         <ion-icon name="color-palette-outline" slot="start"></ion-icon>
-        <ion-label>Tema</ion-label>
+        <ion-label>{{'theme' | translate}}</ion-label>
         <ion-select [(ngModel)]="theme" 
                     (ngModelChange)="themeChanged($event)">
           <ion-select-option [value]="t" 
@@ -14,7 +14,7 @@
       </ion-item>
       <ion-item> <!-- LANGUAGE -->
         <ion-icon name="language-outline" slot="start"></ion-icon>
-        <ion-label>Idioma</ion-label>
+        <ion-label>{{'language' | translate}}</ion-label>
         <ion-select [(ngModel)]="language"
                     (ngModelChange)="languageChanged($event)">
           <ion-select-option [value]="l.value" 
@@ -24,11 +24,11 @@
       </ion-item>
       <ion-item> <!-- REMEMBER -->
         <ion-icon name="mail-outline" slot="start"></ion-icon>
-        <ion-label>Recordar Email</ion-label>
+        <ion-label>{{'re.email' | translate}}</ion-label>
         <ion-select [(ngModel)]="remember"
                     (ngModelChange)="rememberChanged($event)">
           <ion-select-option [value]="r.value" 
-                             *ngFor="let r of mail">{{r.name}}
+                             *ngFor="let r of mail">{{r.name | translate}}
           </ion-select-option>
         </ion-select>
       </ion-item>
@@ -36,8 +36,8 @@
     <ion-list inset="true">
       <ion-item lines="none"> <!-- LOG OUT -->
         <ion-icon name="exit-outline" slot="start"></ion-icon>
-        <ion-label>Desconectar</ion-label>
-        <ion-button (click)="logout()">Salir</ion-button>
+        <ion-label>{{'logout' | translate}}</ion-label>
+        <ion-button (click)="logout()">{{'exit' | translate}}</ion-button>
       </ion-item>
     </ion-list>
   </div>

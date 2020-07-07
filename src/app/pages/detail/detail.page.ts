@@ -8,6 +8,7 @@ import { EditComponent } from '@shared/components/modals/edit/edit.component';
 import { PreviewComponent } from '@shared/components/modals/preview/preview.component';
 import { takeUntil } from 'rxjs/operators';
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detail',
@@ -24,7 +25,8 @@ export class DetailPage implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private draftSrv: DraftsService,
     private modalCtrl: ModalController,
-    private crafter: CrafterService
+    private crafter: CrafterService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +61,10 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   public update(): void {
-    const confirm = this.crafter.confirm('¿Quieres guardar el mensaje?', 'Guardar Artículo');
+    const confirm = this.crafter.confirm(
+      this.translate.instant('save.now'),
+      this.translate.instant('save.article')
+    );
     confirm.then(res => {
       if (!res.role) {
         this.draftSrv.updateDraftMessage(
@@ -67,7 +72,7 @@ export class DetailPage implements OnInit, OnDestroy {
         ).pipe(takeUntil(this.unsubscribe$))
          .subscribe(_ => {
            this.draftSrv.getDraftsByUser().toPromise().then();
-           this.crafter.alert('Mensaje Actualizado');
+           this.crafter.alert(this.translate.instant('message.updated'));
           });
       }
     })

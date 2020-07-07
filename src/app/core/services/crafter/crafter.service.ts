@@ -40,7 +40,7 @@ export class CrafterService {
       mode: 'ios',
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('cancel'),
           role: 'cancel',
         },
         { text: 'OK' }
@@ -73,7 +73,8 @@ export class CrafterService {
 
   public async loader(): Promise<void> {
     const loading = await this.loading.create({
-      message: `Cargando...`});
+      message: this.translate.instant('loading')
+    });
     await loading.present();
   }
 

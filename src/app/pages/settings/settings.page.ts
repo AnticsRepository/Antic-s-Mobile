@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { StorageService } from '@core/services/storage/storage.service';
 import { LanguageService } from '@core/language/services/language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,7 @@ export class SettingsPage implements OnInit {
   ]
 
   mail = [
-    { value: true, name: 'Sí' },
+    { value: true, name: 'yes' },
     { value: false, name: 'No' }
   ];
 
@@ -32,7 +33,8 @@ export class SettingsPage implements OnInit {
     private crafter: CrafterService,
     private router: Router,
     private ls: StorageService,
-    private languageSrv: LanguageService
+    private languageSrv: LanguageService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -60,7 +62,10 @@ export class SettingsPage implements OnInit {
   }
 
   public logout(): void {
-    const confirm = this.crafter.confirm('¿Estás seguro que quieres salir?', 'Desconectarse');
+    const confirm = this.crafter.confirm(
+      this.translate.instant('sure.exit'),
+      this.translate.instant('logout')
+    );
     confirm.then(res => {
       if (!res.role) {
         this.userSrv.logout();

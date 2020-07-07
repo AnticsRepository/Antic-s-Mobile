@@ -8,6 +8,7 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit',
@@ -30,7 +31,8 @@ export class EditComponent implements OnInit, OnDestroy {
     private modalCtrl: ModalController,
     private draftSrv: DraftsService,
     private crafter: CrafterService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -109,7 +111,7 @@ export class EditComponent implements OnInit, OnDestroy {
       switchMap(_ => {
       this.modalCtrl.dismiss();
       this.router.navigateByUrl('/tabs/home');
-      this.crafter.alert('Artículo Actualizado');
+      this.crafter.alert(this.translate.instant('article.updated'));
       return this.draftSrv.getDraftsByUser()
     }), takeUntil(this.unsubscribe$)
     ).subscribe();

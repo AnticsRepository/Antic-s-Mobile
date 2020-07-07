@@ -12,7 +12,7 @@
 <ion-content force-overscroll="false">
   <ng-container *ngIf="draft">
     <ion-textarea [(ngModel)]="draft.message"
-                  placeholder="Escribe aquí el mensaje"
+                  [placeholder]="'write.here' | translate"
                   class="full">
     </ion-textarea>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

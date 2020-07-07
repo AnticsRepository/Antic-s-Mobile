@@ -21,7 +21,7 @@ export class SettingsPage implements OnInit {
   lang = [
     { value: 'es', name: 'Español' },
     { value: 'en', name: 'English' }
-  ]
+  ];
 
   mail = [
     { value: true, name: 'yes' },
@@ -71,7 +71,7 @@ export class SettingsPage implements OnInit {
         this.userSrv.logout();
         this.router.navigateByUrl('login');
       }
-    })
+    });
   }
 
 }

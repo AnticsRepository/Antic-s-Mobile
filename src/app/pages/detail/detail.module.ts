@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { DetailPage } from './detail.page';
 import { DetailPageRouting } from './detail.routing';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     DetailPageRouting,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   declarations: [DetailPage]
 })

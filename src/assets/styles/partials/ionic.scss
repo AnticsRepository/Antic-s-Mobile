@@ -7,7 +7,6 @@ ion-item {
  --padding-start: 0;
 }
 
-
 @keyframes autofill {
  to {
    color: #f4f5f8;
@@ -28,3 +27,7 @@ input:-webkit-autofill {
  -webkit-animation-name: autofill;
  -webkit-animation-fill-mode: both;
 }
+
+.full textarea  {
+  height: calc(100vh - 70px);
+ }

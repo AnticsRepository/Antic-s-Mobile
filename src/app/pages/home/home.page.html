@@ -1,22 +1,31 @@
-<ion-content force-overscroll="false" class="tab">
-  <ion-img></ion-img>
-  <div class="title">
-    <span>Mis Artículos</span>
+<ion-content force-overscroll="false">
+  <app-page-header [title]="'articles'"></app-page-header>
+  <div class="tab-delay">
+    <ion-list inset="true" *ngIf="draftSrv.drafts?.length > 0; else noDrafts">
+      <ion-item *ngFor="let draft of draftSrv.drafts"
+                (click)="navigate(draft.slug)"
+                detail
+                class="ion-text-wrap">
+        <ion-avatar slot="start">
+          <img [src]="draft.category | logo">
+        </ion-avatar>
+        <ion-label>
+          {{draft.title}}
+          <ion-icon *ngIf="draft.status === 'Draft'"
+                    name="brush-outline" 
+                    color="success"
+                    class="icon-draft">
+          </ion-icon>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  
+    <ng-template #noDrafts>
+      <div class="no-articles">
+        {{'no.articles' | translate}}
+      </div>
+    </ng-template>
   </div>
-
-  <ion-list inset="true">
-    <ion-item *ngFor="let draft of draftSrv.drafts"
-              (click)="navigate(draft.slug)"
-              detail
-              class="ion-text-wrap">
-      <ion-avatar slot="start">
-        <img [src]="draft.category | logo">
-      </ion-avatar>
-      <ion-label>
-        {{draft.title}}
-      </ion-label>
-    </ion-item>
-  </ion-list>
 
   <ion-fab vertical="bottom" 
           horizontal="end" 

@@ -7,6 +7,7 @@ import { LoginPageRouting } from './login.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SocialLoginComponent } from './components/social-login/social-login.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SocialLoginComponent } from './components/social-login/social-login.com
     LoginPageRouting,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   declarations: [
     LoginPage,

@@ -1,6 +1,6 @@
 <ion-content>
   <div class="flex flex-column">
-    <h3>Bienvenido</h3>
+    <h3>{{'welcome' | translate}}</h3>
     <h1>Antic<span>'</span>s Code</h1>
   
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -8,7 +8,7 @@
         <ion-item>
           <ion-input name="email"
                      type="email"
-                     placeholder="Correo"
+                     [placeholder]="'email' | translate"
                      formControlName="email"
                      [autofocus]="true">
           </ion-input>
@@ -16,12 +16,12 @@
         <ion-item>
           <ion-input name="password"
                      type="password"
-                     placeholder="Contraseña"
+                     [placeholder]="'password' | translate"
                      formControlName="password">
           </ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label class="remember">Recordar</ion-label>
+          <ion-label class="remember">{{'remember' | translate}}</ion-label>
             <ion-checkbox [(ngModel)]="remember"
                           slot="end"
                           mode="md"
@@ -40,9 +40,9 @@
     </form>
     <app-social-login></app-social-login>
 
-    <p>¿No tienes cuenta? Crea una  
+    <p>{{'no.account' | translate}}  
       <a href="https://anticscode.netlify.com/"
-      target="_NEW"><span >aquí</span>
+      target="_NEW"><span >{{'here' | translate}}</span>
       </a>.
     </p>
   </div>

@@ -1,12 +1,12 @@
 {
   "name": "antics-mobile-creator",
-  "version": "0.0.2",
+  "version": "0.1.2",
   "author": "Sergi Martínez",
   "homepage": "https://anticscode.netlify.com/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --buildOptimizer=true --output-hashing=all",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

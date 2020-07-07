@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Crear Artículo
+      {{'create.article' | translate}}
     </ion-title>
     <ion-buttons slot="start">
       <ion-button shape="round" (click)="close()">
@@ -16,17 +16,20 @@
     <form [formGroup]="createForm" #f (ngSubmit)="onSubmit()">
       <ion-list inset="true">
         <ion-item> <!-- TITLE -->
-          <ion-label position="stacked">Título</ion-label>
+          <ion-label position="stacked">
+            {{'title' | translate}} 
+            <span class="white">(Min 10, Max 35)</span>
+          </ion-label>
           <ion-input formControlName="title"></ion-input>
         </ion-item>
         <ion-item> <!-- COVER -->
-          <ion-label position="stacked">Imagen 
+          <ion-label position="stacked">{{'image' | translate}} 
             <span class="white">(URL)</span>
           </ion-label>
           <ion-input formControlName="cover" ></ion-input>
         </ion-item>
         <ion-item> <!-- CATEGORY -->
-          <ion-label>Categoría</ion-label>
+          <ion-label class="select">{{'category' | translate}}</ion-label>
           <ion-select formControlName="category">
             <ion-select-option [value]="c" 
                                *ngFor="let c of categories">{{c}}
@@ -34,59 +37,64 @@
           </ion-select>
         </ion-item>
         <ion-item> <!-- LEVEL -->
-          <ion-label>Nivel</ion-label>
+          <ion-label class="select">{{'level' | translate}}</ion-label>
           <ion-select formControlName="level">
             <ion-select-option [value]="l" 
                                *ngFor="let l of levels">
-                               {{l}}
+                               {{l | translate}}
             </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item> <!-- TAGS -->
-          <ion-label>Etiquetas 
+          <ion-label class="select">{{'tags' | translate}} 
             <span class="white">(Max 3)</span>
           </ion-label>
           <ion-select formControlName="tags" multiple="true">
             <ion-select-option [value]="t" 
                                *ngFor="let t of tags">
-                               {{t}}
+                               {{t | translate}}
             </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item> <!-- BADGES -->
-          <ion-label>Estado 
+          <ion-label class="select">{{'badge' | translate}} 
             <span class="white">(Max 2)</span>
           </ion-label>
-          <ion-select formControlName="badges" multiple="true">
+          <ion-select formControlName="badges" 
+                      multiple="true">
             <ion-select-option [value]="b" 
                                *ngFor="let b of badges">
-                               {{b}}
+                               {{b | translate}}
             </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item> <!-- SUMMARY -->
-          <ion-label position="stacked">Introducción 
+          <ion-label position="stacked">{{'intro' | translate}} 
             <span class="white">(Min 100)</span>
           </ion-label>
           <ion-textarea rows="4" formControlName="summary"></ion-textarea>
         </ion-item>
         <ion-item> <!-- LINKS -->
-          <ion-label position="stacked">Nombre Enlace</ion-label>
+          <ion-label position="stacked">
+            {{'link.name' | translate}}
+            <span class="white">(Max 3)</span>
+          </ion-label>
           <ion-input formControlName="link_name"></ion-input>
         </ion-item>
         <ion-item> <!-- LINKS -->
-          <ion-label position="stacked">URL Enlace</ion-label>
+          <ion-label position="stacked">{{'link.url' | translate}}</ion-label>
           <ion-input formControlName="link_url"></ion-input>
         </ion-item>
         <ion-item>
           <ion-button (click)="addLink()" 
-                      color="success"
-                      [disabled]="draft?.links?.length == 3">Insertar
+                      color="tertiary"
+                      [disabled]="draft?.links?.length == 3">{{'insert.link' | translate}}
           </ion-button>
-          <ion-label class="white" slot="end">(Máx 3)</ion-label>
-          <ion-label class="white" 
-                     slot="end">Total {{draft?.links?.length || 0}}
-          </ion-label>
+          <div class="total-links">
+            <ion-label class="white select" slot="end">
+              Total {{draft?.links?.length || 0}}
+            </ion-label>
+          </div>
         </ion-item>
       </ion-list>
     </form>
@@ -97,6 +105,6 @@
   <ion-button expand="full" 
               type="submit" 
               (click)="onSubmit()"
-              [disabled]="createForm.invalid">Crear    
+              [disabled]="createForm.invalid">{{'create' | translate}}    
   </ion-button>
 </ion-footer>

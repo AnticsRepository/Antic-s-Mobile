@@ -1,6 +1,6 @@
 ion-img {
  clip-path: ellipse(75% 99% at 50% 0);
- height: 100px;
+ height: 80px;
  object-fit: cover;
  z-index: 0;
 
@@ -8,7 +8,7 @@ ion-img {
   content: "";
   position: absolute;
   width: 100%;
-  height: 100px;
+  height: 80px;
   left: 0;
   top: 0;
   background: var(--ion-color-primary-shade);
@@ -20,7 +20,7 @@ ion-img {
  display: flex;
  justify-content: center;
  position: absolute;
- top: 48px;
+ top: 38px;
  left: 50%;
  transform: translate(-50%, -50%);
  z-index: 100;
@@ -32,44 +32,5 @@ ion-img {
   0px 4px 3px rgba(0,0,0,0.8),
   0px 8px 13px rgba(0,0,0,0.2),
   0px 18px 23px rgba(0,0,0,0.2);
- }
-}
-
-.language {
- --background: rgba(0,0,0,0.2);
- --padding-start: 1rem;
- margin-top: 1rem;
- border-radius: 4px;
-
- & ion-icon { 
-  margin-right: 1rem;
-  color: var(--ion-color-primary);
- }
-}
-
-ion-card {
- box-shadow: none !important;
-}
-
-ion-card-header {
- padding-top: 5px;
-}
-
-ion-card-content {
-  padding-bottom: 0;
-}
-
-ion-list {
- padding-top: 0;
- margin-bottom: .8rem;
-
- & ion-item {
-   & ion-icon { 
-    margin-right: 1rem;
-   }
-
-   & ion-label {
-    font-size: .9rem;
-   }
  }
 }

@@ -4,8 +4,8 @@ import { Draft } from '@shared/interfaces/interfaces';
 import { Subject } from 'rxjs';
 import { DraftsService } from '@core/services/drafts/drafts.service';
 import { ModalController } from '@ionic/angular';
-import { EditComponent } from '@shared/components/modals/edit/edit.component';
-import { PreviewComponent } from '@shared/components/modals/preview/preview.component';
+import { EditComponent } from '@app/shared/components/modals/edit/edit.component';
+import { PreviewComponent } from '@app/shared/components/modals/preview/preview.component';
 import { takeUntil } from 'rxjs/operators';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -75,7 +75,7 @@ export class DetailPage implements OnInit, OnDestroy {
            this.crafter.alert(this.translate.instant('message.updated'));
           });
       }
-    })
+    });
   }
 
   ngOnDestroy() {

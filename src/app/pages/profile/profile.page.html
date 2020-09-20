@@ -9,13 +9,13 @@
           </ion-avatar>
           <ion-label>
             <ion-text>{{user.name}}</ion-text>
-            <p>{{(user.profile?.rol | translate) || ('not.defined' | translate)}}</p>
+            <p>{{(user.profile?.rol | translate) || ('NOT.DEFINED' | translate)}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none" class="language">
           <ion-icon name="library-outline"></ion-icon>
           <ion-label>
-            {{user.profile?.language || ('not.defined' | translate)}}
+            {{user.profile?.language || ('NOT.DEFINED' | translate)}}
           </ion-label>
         </ion-item>
       </ion-card-header>
@@ -38,7 +38,7 @@
             [innerHTML]="(user.profile?.bio | sanitizer: 'html')">
         </p>
         <p *ngIf="!user.profile.bio">
-          {{'bio.not.defined' | translate}} 
+          {{'bio.NOT.DEFINED' | translate}} 
         </p>
       </ion-card-content>
     </ion-card>

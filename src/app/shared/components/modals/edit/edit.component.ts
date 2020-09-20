@@ -112,9 +112,9 @@ export class EditComponent implements OnInit, OnDestroy {
       this.modalCtrl.dismiss();
       this.router.navigateByUrl('/tabs/home');
       this.crafter.alert(this.translate.instant('article.updated'));
-      return this.draftSrv.getDraftsByUser()
+      return this.draftSrv.getDraftsByUser();
     }), takeUntil(this.unsubscribe$)
-    ).subscribe();
+    ).toPromise().then();
   }
 
   ngOnDestroy() {

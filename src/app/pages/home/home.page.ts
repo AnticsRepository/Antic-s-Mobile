@@ -38,7 +38,7 @@ export class HomePage implements OnInit, OnDestroy {
     if (!this.draftSrv.get()) {
       this.draftSrv.getDraftsByUser()
        .pipe(takeUntil(this.unsubscribe$))
-       .subscribe();
+       .toPromise().then();
     }
   }
 
@@ -62,7 +62,7 @@ export class HomePage implements OnInit, OnDestroy {
           });
           modal.present();
         }
-      })
+      });
     } else {
       const modal = await this.modalCtrl.create({
         component: CreateComponent

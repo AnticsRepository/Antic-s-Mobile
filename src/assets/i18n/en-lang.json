@@ -61,6 +61,17 @@
  "overwrite": "Want to overwrite it?",
  "article.exist": "An Article already exist",
  "sure.exit": "Are You sure You want to leave?",
- "loading": "Loading..."
+ "loading": "Loading...",
+ "LEVEL": {
+  "ADVANCED": "Advanced",
+  "BASIC": "Basic",
+  "MEDIUM": "Medium",
+  "NAME": "Difficulty"
+ },
+ "BADGE": {
+  "HOT": "Hot",
+  "NEW": "New",
+  "PRO": "Prominent"
+ }
 }
 

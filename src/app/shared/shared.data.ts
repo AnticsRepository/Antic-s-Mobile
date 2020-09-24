@@ -11,7 +11,8 @@ export const CATEGORIES: string[] = [
  'Python',
  'Git',
  'Antic\'s',
- 'Deno'
+ 'Deno',
+ 'PHP'
 ];
 
 export const TAGS: string[] = [
@@ -31,13 +32,13 @@ export const TAGS: string[] = [
 ];
 
 export const LEVELS: string[] = [
- 'Básico',
- 'Medio',
- 'Avanzado'
+ 'LEVEL.BASIC',
+ 'LEVEL.MEDIUM',
+ 'LEVEL.ADVANCED'
 ];
 
 export const BADGES: string[] = [
- 'Nuevo',
- 'Destacado',
- 'Popular'
+ 'BADGE.NEW',
+ 'BADGE.PRO',
+ 'BADGE.HOT'
 ];

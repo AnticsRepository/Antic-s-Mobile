@@ -39,7 +39,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.createDraftForm()
+    this.createDraftForm();
     this.draft.links = [];
   }
 
@@ -126,7 +126,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         if (!res.role) {
           this.router.navigateByUrl('detail/' + _.slug);
         }
-      })
+      });
     });
   }
 

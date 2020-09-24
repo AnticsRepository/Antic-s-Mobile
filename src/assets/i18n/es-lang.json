@@ -2,13 +2,13 @@
   "articles": "Artículos",
   "profile": "Perfil",
   "config": "Configuración",
-  "web.dev": "Web",
-  "front.dev": "Frontend",
-  "back.dev": "Backend",
-  "full.dev": "Full-Stack",
-  "design.dev": "Diseñador",
-  "design.web": "Diseñador Web",
-  "mobile.dev": "Mobile",
+  "WEB.DEV": "Web",
+  "FRONT.DEV": "Frontend",
+  "BACK.DEV": "Backend",
+  "FULL.DEV": "Full-Stack",
+  "DESIGN.DEV": "Diseñador",
+  "DESIGN.WEB": "Diseñador Web",
+  "MOBILE.DEV": "Mobile",
   "NOT.DEFINED": "Sin definir",
   "bio.NOT.DEFINED": "No definido. Escribe algo sobre tí.",
   "no.articles": "Sin Artículos",
@@ -62,5 +62,16 @@
   "overwrite": "¿Quieres sobreescribirlo?",
   "article.exist": "Ya existe un Artículo",
   "sure.exit": "¿Estás seguro que quieres salir?",
-  "loading": "Cargando..."
- }
+  "loading": "Cargando...",
+  "LEVEL": {
+    "ADVANCED": "Avanzado",
+    "BASIC": "Básico",
+    "MEDIUM": "Medio",
+    "NAME": "Dificultad"
+  },  
+  "BADGE": {
+    "HOT": "Popular",
+    "NEW": "Nuevo",
+    "PRO": "Destacado"
+  }
+}

@@ -69,6 +69,8 @@ export interface Draft extends Content {
   summary?: string;
   status?: string;
   check?: Check;
+  github?: boolean;
+  githubLink?: string;
 }
 
 export interface Check {

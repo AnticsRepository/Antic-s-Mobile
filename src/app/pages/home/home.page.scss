@@ -1,0 +1,25 @@
+ion-item {
+  --full-highlight-height: 0;
+  --border-width: 0 !important;
+}
+
+ion-avatar {
+  width: 30px;
+  height: 32px;
+  --border-radius: 4px;
+}
+
+.no-articles {
+  width: 100%;
+  height: calc(100vh - 156px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.icon-draft {
+  margin-left: .5rem;
+  position: relative;
+  top: 2px;
+}

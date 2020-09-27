@@ -18,6 +18,78 @@ interface UserProfile {
  language?: string;
 }
 
+interface ServerResponse {
+  ok: boolean;
+  message?: string;
+  err?: any;
+}
+
+export interface UserResponse extends ServerResponse {
+  user: User;
+  token?: string;
+}
+
+export interface DraftResponse extends ServerResponse {
+  draft?: Draft;
+  drafts?: Draft[];
+}
+
+interface Content {
+  _id?: string;
+  title?: string;
+  category?: string;
+  cover?: string;
+  tags?: string[];
+  badges?: string[];
+  likes?: number;
+  stars?: number;
+  links?: Link[];
+  index?: Index[];
+}
+
+export interface Index {
+  title: string;
+  subtitle: string;
+  id: string;
+}
+
+export interface Link {
+  name: string;
+  url: string;
+}
+
+export interface Draft extends Content {
+  message?: string;
+  user?: string;
+  author?: string;
+  created?: string;
+  slug?: string;
+  level?: string;
+  views?: number;
+  summary?: string;
+  status?: string;
+  check?: Check;
+  github?: boolean;
+  githubLink?: string;
+}
+
+export interface Check {
+  hasGoodTitle?: CheckStatus;
+  hasGoodCategory?: CheckStatus;
+  hasGoodTags?: CheckStatus;
+  hasGoodBadges?: CheckStatus;
+  hasGoodLevel?: CheckStatus;
+  hasGoodLinks?: CheckStatus;
+  hasGoodCover?: CheckStatus;
+  hasGoodSummary?: CheckStatus;
+  hasGoodMessage?: CheckStatus;
+}
+
+export interface CheckStatus {
+  ok?: boolean;
+  cause?: string;
+}
+
 export class CustomError {
  name: string;
  message: string;

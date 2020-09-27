@@ -10,8 +10,8 @@ export interface AppConfig {
 }
 
 export const APP_CONSTANTS: AppConfig = {
-  TITLE: 'Antic\'s Code Desktop',
-  DEFAULT_LANGUAGE: 'en',
+  TITLE: 'Antic\'s Mobile Creator',
+  DEFAULT_LANGUAGE: 'es',
   PLATFORM: 'Mobile'
 };
 

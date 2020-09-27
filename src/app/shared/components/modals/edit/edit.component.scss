@@ -1,0 +1,38 @@
+ion-label {
+ --color: var(--ion-color-primary) !important;
+}
+
+ion-item { 
+ --highlight-color-invalid: transparent;
+ --highlight-color-valid: transparent;
+ --inner-padding-end: 0;
+}
+
+ion-input, ion-textarea {
+ font-size: .9rem;
+ padding: 5px 0 !important;
+}
+
+ion-select {
+ --padding-end: 0;
+ max-width: 60%;
+ font-size: .9rem;
+}
+
+ion-button { margin: 0 }
+ion-list { 
+ margin-top: 0 !important;
+ margin-bottom: 0 !important;
+}
+
+.white {
+ color: var(--ion-color-dark);
+}
+
+.select {
+ font-size: .75rem !important;
+}
+
+ion-select::part(icon) {
+ margin-left: .6rem;
+}

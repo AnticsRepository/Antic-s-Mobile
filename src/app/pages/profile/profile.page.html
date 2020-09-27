@@ -1,11 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Profile
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  Profile
+<ion-content force-overscroll="false">
+  <app-page-header [title]="'profile'"></app-page-header>
+  <div class="tab-delay">
+    <ion-card *ngIf="user">
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="user.profile?.avatar"/>
+          </ion-avatar>
+          <ion-label>
+            <ion-text>{{user.name}}</ion-text>
+            <p>{{(user.profile?.rol | translate) || ('NOT.DEFINED' | translate)}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none" class="language">
+          <ion-icon name="library-outline"></ion-icon>
+          <ion-label>
+            {{user.profile?.language || ('NOT.DEFINED' | translate)}}
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list *ngIf="user.profile">
+          <ion-item lines="none" *ngIf="user.profile.portfolio">
+            <ion-icon name="logo-chrome"></ion-icon>
+            <ion-label>{{user.profile?.portfolio}}</ion-label>
+          </ion-item>
+          <ion-item lines="none" *ngIf="user.profile.github">
+            <ion-icon name="logo-github"></ion-icon>
+            <ion-label>{{user.profile?.github}}</ion-label>
+          </ion-item>
+          <ion-item lines="none" *ngIf="user.profile.twitter">
+            <ion-icon name="logo-twitter"></ion-icon>
+            <ion-label>{{user.profile?.twitter}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <p *ngIf="user.profile.bio" 
+            [innerHTML]="(user.profile?.bio | sanitizer: 'html')">
+        </p>
+        <p *ngIf="!user.profile.bio">
+          {{'bio.NOT.DEFINED' | translate}} 
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

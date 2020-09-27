@@ -12,8 +12,6 @@ export class ErrorHandlerService implements ErrorHandler {
   constructor(private injector: Injector) { }
 
   handleError(error: Error | HttpErrorResponse): void {
-    const router = this.injector.get(Router);
-    const ngZone = this.injector.get(NgZone);
     const service = this.injector.get(ErrorService);
     switch (error.constructor) {
       case TypeError: {
@@ -33,9 +31,6 @@ export class ErrorHandlerService implements ErrorHandler {
       window.location.reload();
       return;
     }
-
-    ngZone.run(() => router.navigate(['error'], { queryParams: { error } })
-      .then().catch((e) => { console.log(e); }));
   }
 
 }

@@ -41,5 +41,6 @@ export const BADGES: string[] = [
  'BADGE.NEW',
  'BADGE.PRO',
  'BADGE.HOT',
- 'BADGE.CLASSIC'
+ 'BADGE.CLASSIC',
+ 'BADGE.LOVED'
 ];
